@@ -1,0 +1,59 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:BooruApp.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:BooruApp.Views"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="BooruApp.Views.MainWindow"
+        Icon="/Assets/Icons/avalonia-logo.ico"
+        Title="BooruApp">
+    <Grid RowDefinitions="Auto,*">
+        <Menu Grid.Row="0"
+              Margin="0,0,0,0"
+              Height="26"
+              BorderBrush="{StaticResource NeptuneDarkBorderBrush}"
+              BorderThickness="0,0,0,1">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Refresh"
+                          Command="{Binding FetchImages}"
+                          InputGesture="Ctrl+R"
+                          HotKey="Ctrl+R" />
+
+                <MenuItem Header="_Quit"
+                          Command="{Binding ExitApplication}"
+                          InputGesture="Ctrl+Q"
+                          HotKey="Ctrl+Q" />
+            </MenuItem>
+
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Preferences"
+                          Command="{Binding OpenSettingsCommand}"
+                          InputGesture="Ctrl+K"
+                          HotKey="Ctrl+K" />
+            </MenuItem>
+
+            <MenuItem Header="View" />
+
+            <MenuItem Header="_Help">
+                <MenuItem Header="_Documentation"
+                          Command="{Binding OpenDocumentation}"
+                          InputGesture="Ctrl+F12"
+                          HotKey="Ctrl+F12" />
+
+                <MenuItem Header="Report a _bug"
+                          Command="{Binding OpenIssuesPage}"
+                          InputGesture="Ctrl+F11"
+                          HotKey="Ctrl+F11" />
+
+                <Separator />
+
+                <MenuItem Header="_About this program"
+                          Command="{Binding OpenAboutWindow}"
+                          InputGesture="Ctrl+F10"
+                          HotKey="Ctrl+F10" />
+            </MenuItem>
+        </Menu>
+        <views:MainView Grid.Row="1" />
+    </Grid>
+</Window>

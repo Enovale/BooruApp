@@ -1,0 +1,53 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!-- Add Controls for Previewer Here -->
+        </Border>
+    </Design.PreviewWith>
+
+    <Styles.Resources>
+        <SolidColorBrush x:Key="NeptuneMediumBorderBrush"
+                         Color="#686868" />
+
+        <SolidColorBrush x:Key="ThemeBorderMidBrush"
+                         Color="#686868" />
+
+        <SolidColorBrush x:Key="NeptuneDarkBorderBrush"
+                         Color="#1C1C1C" />
+
+        <SolidColorBrush x:Key="NeptuneSelectedActiveItemBackgroundBrush"
+                         Color="#304885" />
+
+        <SolidColorBrush x:Key="NeptuneHoveredItemBackgroundBrush"
+                         Color="#484848" />
+
+        <SolidColorBrush x:Key="NeptuneMediumBackgroundBrush"
+                         Color="#383838" />
+
+        <SolidColorBrush x:Key="NeptuneBackgroundBrush"
+                         Color="#282828" />
+
+        <SolidColorBrush x:Key="NeptuneDarkBackgroundBrush"
+                         Color="#181818" />
+
+        <SolidColorBrush x:Key="NeptuneSemiTransparentForegroundBrush"
+                         Color="#66FFFFFF" />
+    </Styles.Resources>
+
+    <Style Selector="AccessText">
+        <Setter Property="FontFamily"
+                Value="avares://BooruApp/Assets/Fonts/OpenSans.ttf#Open Sans" />
+
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontWeight" Value="400" />
+    </Style>
+
+    <Style Selector="TextBlock">
+        <Setter Property="FontFamily"
+                Value="avares://BooruApp/Assets/Fonts/OpenSans.ttf#Open Sans" />
+
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontWeight" Value="400" />
+    </Style>
+</Styles>
