@@ -1,0 +1,15 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:BooruApp"
+             xmlns:glitonea="clr-namespace:Glitonea;assembly=Glitonea"
+             xmlns:converters="clr-namespace:Glitonea.Mvvm.Converters;assembly=Glitonea"
+             x:Class="BooruApp.App">
+    <Application.Resources>
+        <converters:EnumDescriptionConverter x:Key="EnumDescriptionConverter" />    
+    </Application.Resources>
+
+    <Application.Styles>
+        <FluentTheme Mode="Dark"/>
+        <StyleInclude Source="avares://BooruApp/Resources/Styles/BaseAppStyle.axaml" />
+    </Application.Styles>
+</Application>

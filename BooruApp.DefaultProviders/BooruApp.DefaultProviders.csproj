@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\BooruApp.Api\BooruApp.Api.csproj" />
+      <ProjectReference Include="..\BooruApp.Backend\BooruApp.Backend.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+            <_Parameter1>BooruApp</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
+
+</Project>
