@@ -1,3 +1,4 @@
+using System;
 using BooruApp.Api.Interfaces;
 
 namespace BooruApp.Api

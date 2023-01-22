@@ -2,12 +2,12 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using PropertyChanged;
 
-namespace BooruApp.Views.Controls
+namespace BooruApp.Views
 {
     [DoNotNotify]
-    public partial class Post : UserControl
+    public partial class ImageListView : UserControl
     {
-        public Post()
+        public ImageListView()
         {
             InitializeComponent();
         }

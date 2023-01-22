@@ -4,6 +4,7 @@ using Android.OS;
 using Application = Android.App.Application;
 using Avalonia;
 using Avalonia.Android;
+using Avalonia.Logging;
 
 namespace BooruApp.Android;
 
@@ -12,7 +13,12 @@ public class SplashActivity : AvaloniaSplashActivity<App>
 {
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
     {
-        return base.CustomizeAppBuilder(builder);
+        return base.CustomizeAppBuilder(builder)
+#if DEBUG
+            .LogToTrace(LogEventLevel.Debug);
+#else
+            .LogToTrace();
+#endif
     }
 
     protected override void OnCreate(Bundle? savedInstanceState)

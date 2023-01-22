@@ -1,5 +1,6 @@
 ﻿using System.Runtime.Versioning;
 using Avalonia;
+using Avalonia.Logging;
 using Avalonia.Web;
 using BooruApp;
 
@@ -11,5 +12,10 @@ internal partial class Program
         .SetupBrowserApp("out");
 
     public static AppBuilder BuildAvaloniaApp()
-        => AppBuilder.Configure<App>();
+        => AppBuilder.Configure<App>()
+#if DEBUG
+            .LogToTrace(LogEventLevel.Debug);
+#else
+            .LogToTrace();
+#endif
 }

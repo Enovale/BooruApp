@@ -1,0 +1,73 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:BooruApp.ViewModels"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:mvvm="clr-namespace:Glitonea.Mvvm;assembly=Glitonea"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BooruApp.Views.ImageListView"
+             Name="ImageList"
+             Foreground="White"
+             Background="{StaticResource NeptuneBackgroundBrush}"
+             DataContext="{mvvm:DataContextSource viewModels:ImageListViewModel}">
+    <Design.DataContext>
+        <viewModels:ImageListViewModel />
+    </Design.DataContext>
+
+    <UserControl.Styles>
+        <Style Selector="asyncImageLoader|AdvancedImage">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid>
+                        <Rectangle Fill="#FF0000" />
+                        <Rectangle Fill="{StaticResource NeptuneDarkBackgroundBrush}" Stretch="Fill">
+                            <Rectangle.IsVisible>
+                                <MultiBinding Converter="{x:Static BoolConverters.Or}">
+                                    <Binding Path="IsLoading" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    <Binding Path="CurrentImage" RelativeSource="{RelativeSource TemplatedParent}"
+                                             Converter="{x:Static ObjectConverters.IsNull}" />
+                                </MultiBinding>
+                            </Rectangle.IsVisible>
+                        </Rectangle>
+                        <Viewbox VerticalAlignment="Stretch" HorizontalAlignment="Center">
+                            <Viewbox.IsVisible>
+                                <MultiBinding Converter="{x:Static BoolConverters.And}">
+                                    <Binding Path="IsLoading" RelativeSource="{RelativeSource TemplatedParent}"
+                                             Converter="{x:Static BoolConverters.Not}" />
+                                    <Binding Path="CurrentImage" RelativeSource="{RelativeSource TemplatedParent}"
+                                             Converter="{x:Static ObjectConverters.IsNull}" />
+                                </MultiBinding>
+                            </Viewbox.IsVisible>
+                            <TextBlock Text="?" />
+                        </Viewbox>
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+    </UserControl.Styles>
+
+    <ScrollViewer AllowAutoHide="False" Margin="0">
+        <ItemsControl HorizontalAlignment="Center" Items="{Binding Items}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel ItemWidth="300" Margin="20" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Command="{Binding DataContext.ImageSelected, ElementName=ImageList}" Margin="8">
+                        <Button.Template>
+                            <ControlTemplate>
+                                <Border CornerRadius="4" ClipToBounds="True">
+                                    <asyncImageLoader:AdvancedImage Source="{Binding PreviewImageUrl}" Stretch="UniformToFill" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </ScrollViewer>
+</UserControl>

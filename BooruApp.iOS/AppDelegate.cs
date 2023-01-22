@@ -4,7 +4,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.iOS;
 using Avalonia.Media;
-using Avalonia.ReactiveUI;
+using Avalonia.Logging;
 
 namespace BooruApp.iOS;
 
@@ -16,6 +16,11 @@ public partial class AppDelegate : AvaloniaAppDelegate<App>
 {
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
     {
-        return builder.UseReactiveUI();
+        return builder
+#if DEBUG
+            .LogToTrace(LogEventLevel.Debug);
+#else
+            .LogToTrace();
+#endif;
     }
 }

@@ -1,15 +1,19 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using PropertyChanged;
 
-namespace BooruApp.Views
+namespace BooruApp.Views.Windows
 {
     [DoNotNotify]
-    public partial class MainView : UserControl
+    public partial class SettingsWindow : Window
     {
-        public MainView()
+        public SettingsWindow()
         {
             InitializeComponent();
+#if DEBUG
+            this.AttachDevTools();
+#endif
         }
 
         private void InitializeComponent()

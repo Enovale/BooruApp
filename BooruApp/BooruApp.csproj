@@ -12,7 +12,6 @@
 
     <ItemGroup>
         <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
-        <PackageReference Include="Avalonia.Svg.Skia" Version="$(AvaloniaVersion)" />
         <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
@@ -26,5 +25,12 @@
       <ProjectReference Include="..\BooruApp.Api\BooruApp.Api.csproj" />
       <ProjectReference Include="..\Submodules\AsyncImageLoader.Avalonia\AsyncImageLoader.Avalonia\AsyncImageLoader.Avalonia.csproj" />
       <ProjectReference Include="..\Submodules\Glitonea\Glitonea.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Views\Windows\MainWindow.axaml.cs">
+        <DependentUpon>MainWindow.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 </Project>

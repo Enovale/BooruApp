@@ -8,9 +8,15 @@
         xmlns:viewModels="clr-namespace:BooruApp.ViewModels"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BooruApp.Views.MainWindow"
+        x:CompileBindings="True"
         Icon="/Assets/Icons/avalonia-logo.ico"
         Title="BooruApp"
+        WindowStartupLocation="CenterOwner"
         DataContext="{mvvm:DataContextSource viewModels:MainViewModel}">
+    <Design.DataContext>
+        <viewModels:MainViewModel />
+    </Design.DataContext>
+    
     <Grid RowDefinitions="Auto,*">
         <Menu Grid.Row="0"
               Margin="0,0,0,0"
@@ -19,40 +25,40 @@
               BorderThickness="0,0,0,1">
             <MenuItem Header="_File">
                 <MenuItem Header="_Refresh"
-                          Command="{Binding FetchImages}"
+                          Command="{ReflectionBinding FetchImages}"
                           InputGesture="Ctrl+R"
                           HotKey="Ctrl+R" />
 
                 <MenuItem Header="_Quit"
-                          Command="{Binding ExitApplication}"
+                          Command="{ReflectionBinding ExitApplication}"
                           InputGesture="Ctrl+Q"
                           HotKey="Ctrl+Q" />
             </MenuItem>
 
             <MenuItem Header="_Edit">
                 <MenuItem Header="_Preferences"
-                          Command="{Binding OpenSettingsCommand}"
-                          InputGesture="Ctrl+K"
-                          HotKey="Ctrl+K" />
+                          Command="{ReflectionBinding OpenSettingsCommand}"
+                          InputGesture="Ctrl+Alt+S"
+                          HotKey="Ctrl+Alt+S" />
             </MenuItem>
 
             <MenuItem Header="View" />
 
             <MenuItem Header="_Help">
                 <MenuItem Header="_Documentation"
-                          Command="{Binding OpenDocumentation}"
+                          Command="{ReflectionBinding OpenDocumentation}"
                           InputGesture="Ctrl+F12"
                           HotKey="Ctrl+F12" />
 
                 <MenuItem Header="Report a _bug"
-                          Command="{Binding OpenIssuesPage}"
+                          Command="{ReflectionBinding OpenIssuesPage}"
                           InputGesture="Ctrl+F11"
                           HotKey="Ctrl+F11" />
 
                 <Separator />
 
                 <MenuItem Header="_About this program"
-                          Command="{Binding OpenAboutWindow}"
+                          Command="{ReflectionBinding OpenAboutWindow}"
                           InputGesture="Ctrl+F10"
                           HotKey="Ctrl+F10" />
             </MenuItem>

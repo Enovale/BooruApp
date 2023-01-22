@@ -1,5 +1,6 @@
 ﻿using System;
 using Avalonia;
+using Avalonia.Logging;
 
 namespace BooruApp.Desktop;
 
@@ -16,5 +17,9 @@ class Program
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
+#if DEBUG
+            .LogToTrace(LogEventLevel.Debug);
+#else
             .LogToTrace();
+#endif
 }
