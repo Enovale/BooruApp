@@ -3,33 +3,33 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using BooruApp.ViewModels;
 using BooruApp.Views;
+using Glitonea;
+using PropertyChanged;
 
-namespace BooruApp;
-
-public partial class App : Application
+namespace BooruApp
 {
-    public override void Initialize()
+    [DoNotNotify]
+    public partial class App : Application
     {
-        AvaloniaXamlLoader.Load(this);
-    }
-
-    public override void OnFrameworkInitializationCompleted()
-    {
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        public override void Initialize()
         {
-            desktop.MainWindow = new MainWindow
-            {
-                DataContext = new MainViewModel()
-            };
-        }
-        else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
-        {
-            singleViewPlatform.MainView = new MainView
-            {
-                DataContext = new MainViewModel()
-            };
+            AvaloniaXamlLoader.Load(this);
         }
 
-        base.OnFrameworkInitializationCompleted();
+        public override void OnFrameworkInitializationCompleted()
+        {
+            GlitoneaCore.Initialize();
+        
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                desktop.MainWindow = new MainWindow();
+            }
+            else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
+            {
+                singleViewPlatform.MainView = new MainView();
+            }
+
+            base.OnFrameworkInitializationCompleted();
+        }
     }
 }

@@ -1,0 +1,6 @@
+[submodule "Submodules/AsyncImageLoader.Avalonia"]
+	path = Submodules/AsyncImageLoader.Avalonia
+	url = https://github.com/Enovale/AsyncImageLoader.Avalonia
+[submodule "Submodules/Glitonea"]
+	path = Submodules/Glitonea
+	url = https://github.com/vddCore/Glitonea.git

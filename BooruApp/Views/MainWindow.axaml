@@ -1,13 +1,16 @@
-<Window xmlns="https://github.com/avaloniaui"
+<glitonea:WindowEx xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:BooruApp.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:BooruApp.Views"
+        xmlns:glitonea="clr-namespace:Glitonea;assembly=Glitonea"
+        xmlns:mvvm="clr-namespace:Glitonea.Mvvm;assembly=Glitonea"
+        xmlns:viewModels="clr-namespace:BooruApp.ViewModels"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BooruApp.Views.MainWindow"
         Icon="/Assets/Icons/avalonia-logo.ico"
-        Title="BooruApp">
+        Title="BooruApp"
+        DataContext="{mvvm:DataContextSource viewModels:MainViewModel}">
     <Grid RowDefinitions="Auto,*">
         <Menu Grid.Row="0"
               Margin="0,0,0,0"
@@ -56,4 +59,4 @@
         </Menu>
         <views:MainView Grid.Row="1" />
     </Grid>
-</Window>
+</glitonea:WindowEx>

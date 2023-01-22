@@ -1,13 +1,14 @@
 using Avalonia.Controls;
-using Avalonia.ReactiveUI;
-using BooruApp.ViewModels;
+using PropertyChanged;
 
-namespace BooruApp.Views;
-
-public partial class MainView : ReactiveUserControl<MainViewModel>
+namespace BooruApp.Views
 {
-    public MainView()
+    [DoNotNotify]
+    public partial class MainView : UserControl
     {
-        InitializeComponent();
+        public MainView()
+        {
+            InitializeComponent();
+        }
     }
 }

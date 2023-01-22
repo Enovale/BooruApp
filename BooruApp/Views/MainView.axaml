@@ -3,13 +3,72 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:BooruApp.ViewModels"
+             xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
+             xmlns:mvvm="clr-namespace:Glitonea.Mvvm;assembly=Glitonea"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="BooruApp.Views.MainView"
+             Name="MainViewControl"
              Foreground="White"
-             Background="#171C2C">
+             Background="#171C2C"
+             DataContext="{mvvm:DataContextSource viewModels:MainViewModel}">
     <Design.DataContext>
         <viewModels:MainViewModel />
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+    <UserControl.Styles>
+        <Style Selector="asyncImageLoader|AdvancedImage">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Panel>
+                        <Rectangle Fill="{StaticResource NeptuneBackgroundBrush}" Stretch="Fill">
+                            <Rectangle.IsVisible>
+                                <MultiBinding Converter="{x:Static BoolConverters.Or}">
+                                    <Binding Path="IsLoading" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    <Binding Path="CurrentImage" RelativeSource="{RelativeSource TemplatedParent}"
+                                             Converter="{x:Static ObjectConverters.IsNull}" />
+                                </MultiBinding>
+                            </Rectangle.IsVisible>
+                        </Rectangle>
+                        <Viewbox VerticalAlignment="Stretch" HorizontalAlignment="Center">
+                            <Viewbox.IsVisible>
+                                <MultiBinding Converter="{x:Static BoolConverters.And}">
+                                    <Binding Path="IsLoading" RelativeSource="{RelativeSource TemplatedParent}"
+                                             Converter="{x:Static BoolConverters.Not}" />
+                                    <Binding Path="CurrentImage" RelativeSource="{RelativeSource TemplatedParent}"
+                                             Converter="{x:Static ObjectConverters.IsNull}" />
+                                </MultiBinding>
+                            </Viewbox.IsVisible>
+                            <TextBlock Text="?" />
+                        </Viewbox>
+                    </Panel>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+    </UserControl.Styles>
+
+    <ScrollViewer Margin="0">
+        <StackPanel Margin="0">
+            <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <ItemsControl HorizontalAlignment="Center" Items="{Binding TestItems}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel ItemWidth="300" Margin="20" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding DataContext.SelectImage, ElementName=MainViewControl}"
+                                Margin="8">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <asyncImageLoader:AdvancedImage Source="{Binding}" Stretch="UniformToFill" />
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

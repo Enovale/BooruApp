@@ -1,13 +1,14 @@
-using Avalonia.Controls;
-using Avalonia.ReactiveUI;
-using BooruApp.ViewModels;
+using Glitonea;
+using PropertyChanged;
 
-namespace BooruApp.Views;
-
-public partial class MainWindow : ReactiveWindow<MainViewModel>
+namespace BooruApp.Views
 {
-    public MainWindow()
+    [DoNotNotify]
+    public partial class MainWindow : WindowEx
     {
-        InitializeComponent();
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
     }
 }

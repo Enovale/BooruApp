@@ -21,6 +21,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PlatformSpecific", "PlatformSpecific", "{3DE895DF-CA54-4B33-9DA3-B49BB0E26556}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooruApp.Api", "BooruApp.Api\BooruApp.Api.csproj", "{AB252C64-6230-4FE7-8377-C4212193C23A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Submodules", "Submodules", "{8162E6C7-334A-4C02-9DB7-004318B2CBAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncImageLoader.Avalonia", "Submodules\AsyncImageLoader.Avalonia\AsyncImageLoader.Avalonia\AsyncImageLoader.Avalonia.csproj", "{7242BD38-6AD6-4216-AF7D-F573C2253DA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glitonea", "Submodules\Glitonea\Glitonea.csproj", "{920CA64A-C838-438B-A6C8-0C9BEE549CED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooruApp.DefaultProviders", "BooruApp.DefaultProviders\BooruApp.DefaultProviders.csproj", "{10D094A0-CC03-4674-8F31-061632B9037F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +57,22 @@ Global
 		{7AD1DAC8-7FBE-49D5-8614-7321233DB82E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AD1DAC8-7FBE-49D5-8614-7321233DB82E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AD1DAC8-7FBE-49D5-8614-7321233DB82E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB252C64-6230-4FE7-8377-C4212193C23A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB252C64-6230-4FE7-8377-C4212193C23A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB252C64-6230-4FE7-8377-C4212193C23A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB252C64-6230-4FE7-8377-C4212193C23A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7242BD38-6AD6-4216-AF7D-F573C2253DA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7242BD38-6AD6-4216-AF7D-F573C2253DA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7242BD38-6AD6-4216-AF7D-F573C2253DA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7242BD38-6AD6-4216-AF7D-F573C2253DA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{920CA64A-C838-438B-A6C8-0C9BEE549CED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{920CA64A-C838-438B-A6C8-0C9BEE549CED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{920CA64A-C838-438B-A6C8-0C9BEE549CED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{920CA64A-C838-438B-A6C8-0C9BEE549CED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10D094A0-CC03-4674-8F31-061632B9037F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10D094A0-CC03-4674-8F31-061632B9037F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10D094A0-CC03-4674-8F31-061632B9037F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10D094A0-CC03-4674-8F31-061632B9037F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,5 +85,7 @@ Global
 		{EBD9022F-BC83-4846-9A11-6F7F3772DC64} = {3DE895DF-CA54-4B33-9DA3-B49BB0E26556}
 		{ABC31E74-02FF-46EB-B3B2-4E6AE43B456C} = {3DE895DF-CA54-4B33-9DA3-B49BB0E26556}
 		{7AD1DAC8-7FBE-49D5-8614-7321233DB82E} = {3DE895DF-CA54-4B33-9DA3-B49BB0E26556}
+		{7242BD38-6AD6-4216-AF7D-F573C2253DA9} = {8162E6C7-334A-4C02-9DB7-004318B2CBAE}
+		{920CA64A-C838-438B-A6C8-0C9BEE549CED} = {8162E6C7-334A-4C02-9DB7-004318B2CBAE}
 	EndGlobalSection
 EndGlobal
