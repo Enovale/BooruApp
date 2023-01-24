@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Reactive.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using BooruApp.Api;
 using BooruApp.Api.Models;
+using BooruApp.Infrastructure.Models;
 
-namespace BooruApp.Services
+namespace BooruApp.Infrastructure.Services
 {
     public class ServerService : IServerService
     {
@@ -119,12 +119,15 @@ namespace BooruApp.Services
             return await _currentProvider!.ProviderInstance.CompatibilityCheck();
         }
 
-        public async Task<List<Post>?> SearchPosts(params string[] tags)
+        public async Task<List<Post>?> SearchPosts(int page, params string[] tags)
         {
             if (!InitServerProvider())
                 return null;
             
-            return await _currentProvider!.ProviderInstance.SearchPosts(tags);
+            return await _currentProvider!.ProviderInstance.SearchPosts(page, tags);
         }
+
+        public Task<List<Post>?> SearchPosts(params string[] tags)
+            => SearchPosts(0, tags);
     }
 }

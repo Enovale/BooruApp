@@ -4,10 +4,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:BooruApp.Views"
         xmlns:glitonea="clr-namespace:Glitonea;assembly=Glitonea"
+        xmlns:viewModels="clr-namespace:BooruApp.ViewModels"
+        xmlns:mvvm="clr-namespace:Glitonea.Mvvm;assembly=Glitonea"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BooruApp.Views.Windows.SettingsWindow"
         WindowStartupLocation="CenterOwner"
-        x:CompileBindings="True"
-        Title="Settings">
-    <views:SettingsView />
+        Name="SettingsWindowRoot"
+        Title="{Binding DirtyIndicator, StringFormat=Preferences{0}}"
+        DataContext="{mvvm:DataContextSource viewModels:SettingsViewModel}">
+    <Design.DataContext>
+        <viewModels:SettingsViewModel />
+    </Design.DataContext>
+    
+    <Grid RowDefinitions="*,Auto,Auto">
+        <views:SettingsView />
+        <Separator Grid.Row="1" Margin="0 16 0 0" />
+        <StackPanel Grid.Row="2" Margin="16"
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Right">
+            <Button Command="{Binding ApplyConfigAndCloseWindowCommand}"
+                    CommandParameter="{Binding ElementName=SettingsWindowRoot}"
+                    Background="{StaticResource NeptuneSelectedActiveItemBackgroundBrush}" 
+                    Content="OK" />
+            <Button Command="{Binding ApplyConfig}" 
+                    IsEnabled="{Binding Dirty}" 
+                    Content="Apply" />
+            <Button Command="{Binding CloseWindowCommand}"
+                    CommandParameter="{Binding ElementName=SettingsWindowRoot}"
+                    Content="Cancel" />
+        </StackPanel>
+    </Grid>
 </glitonea:WindowEx>

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using BooruApp.Api.Interfaces;
-using BooruApp.Api.Models;
+using BooruApp.Infrastructure.Models;
 using Glitonea.Mvvm;
 
-namespace BooruApp.Services
+namespace BooruApp.Infrastructure.Services
 {
     public interface IServerService : IService, IServerProvider
     {

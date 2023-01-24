@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
 using BooruApp.Api.Interfaces;
 using BooruApp.Api.Models;
 
@@ -15,6 +14,7 @@ namespace BooruApp.Api
 
         public virtual Task<bool> CompatibilityCheck() => Task.FromResult(true);
 
-        public abstract Task<List<Post>> SearchPosts(params string[] tags);
+        public abstract Task<List<Post>?> SearchPosts(int page = 0, params string[] tags);
+        public abstract Task<List<Post>?> SearchPosts(params string[] tags);
     }
 }

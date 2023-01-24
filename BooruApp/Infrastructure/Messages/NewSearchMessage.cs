@@ -1,6 +1,6 @@
 using Glitonea.Mvvm.Messaging;
 
-namespace BooruApp.Messages
+namespace BooruApp.Infrastructure.Messages
 {
     public class NewSearchMessage : Message
     {

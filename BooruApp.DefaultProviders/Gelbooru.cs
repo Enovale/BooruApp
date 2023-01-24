@@ -48,23 +48,25 @@ namespace BooruApp.DefaultProviders
             return uri.ToString();
         }
         
-        public override async Task<List<Post>> SearchPosts(params string[] tags)
+        public override async Task<List<Post>?> SearchPosts(int page = 0, params string[] tags)
         {
-            var url = tags.Length > 0
-                ? GetSearchUrlWithParams("post", ("tags", string.Join(',', tags)))
-                : GetSearchUrlWithParams("post");
+            var url = GetSearchUrlWithParams("post", ("pid", page.ToString()), ("tags", string.Join(',', tags)));
+            Console.WriteLine(url);
 
             var res = await Search<GelbooruPost>(url, "posts");
             
             return res.Select(p => new Post(p.FileUrl, p.PreviewUrl)).ToList();
         }
 
+        public override Task<List<Post>?> SearchPosts(params string[] tags)
+            => SearchPosts(0, tags);
+
         private async Task<List<T>> Search<T>(string url, string rootName)
         {
             using var client = new HttpClient();
             var content = await client.GetStreamAsync(url);
 
-            var serializer = new XmlSerializer(typeof(List<T>), GelbooruPost.R34Overrides(), Type.EmptyTypes, new XmlRootAttribute(rootName), null);
+            var serializer = new XmlSerializer(typeof(List<T>), new XmlRootAttribute(rootName));
             return (List<T>)serializer.Deserialize(content);
         }
     }

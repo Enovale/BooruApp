@@ -1,3 +1,4 @@
+using Avalonia;
 using Avalonia.Markup.Xaml;
 using Glitonea;
 using PropertyChanged;
@@ -10,6 +11,9 @@ namespace BooruApp.Views
         public MainWindow()
         {
             InitializeComponent();
+#if DEBUG
+            this.AttachDevTools();
+#endif
         }
 
         private void InitializeComponent()

@@ -6,8 +6,9 @@ using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 using BooruApp.Api.Models;
+using PropertyChanged;
 
-namespace BooruApp.Services
+namespace BooruApp.Infrastructure.Services
 {
     public class AppStorageService : IAppStorageService
     {
@@ -31,8 +32,10 @@ namespace BooruApp.Services
             Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                 _appName.ToLower());
 
+        [DoNotNotify]
         public string AppName => _appName;
 
+        [DoNotNotify]
         public string AppDataDirectory
         {
             get
@@ -42,6 +45,7 @@ namespace BooruApp.Services
             }
         }
 
+        [DoNotNotify]
         public string PluginDirectory
         {
             get
@@ -51,6 +55,7 @@ namespace BooruApp.Services
             }
         }
 
+        [DoNotNotify]
         public string PluginDepDirectory
         {
             get
@@ -60,6 +65,7 @@ namespace BooruApp.Services
             }
         }
     
+        [DoNotNotify]
         public string CacheDirectory
         {
             get
@@ -69,6 +75,7 @@ namespace BooruApp.Services
             }
         }
     
+        [DoNotNotify]
         public string ConfigDirectory
         {
             get
@@ -78,27 +85,32 @@ namespace BooruApp.Services
             }
         }
 
+        [DoNotNotify]
         public string ConfigFilePath => Path.Combine(ConfigDirectory, "config.json");
         
         public BooruConfig Config { get; }
 
+        private Task? _configTask;
+
         public AppStorageService()
         {
             Config = Task.Run(LoadConfig).Result;
-            Task.Run(SaveConfig);
-            
-            Config.PropertyChanged += ConfigPropertyChanged;
+            SaveConfig();
         }
 
-        private void ConfigPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        public void SaveConfig()
         {
-            Task.Run(SaveConfig);
+            if (_configTask is null || _configTask.IsCompleted)
+            {
+                _configTask = Task.Run(SaveConfigAsync);
+            }
         }
 
-        public async Task SaveConfig()
+        public async Task SaveConfigAsync()
         {
-            await using var file = File.OpenWrite(ConfigFilePath);
+            await using var file = File.Create(ConfigFilePath);
             await JsonSerializer.SerializeAsync(file, Config, new JsonSerializerOptions() { WriteIndented = true});
+            Config.Dirty = false;
         }
 
         public async Task<BooruConfig> LoadConfig()
@@ -107,12 +119,24 @@ namespace BooruApp.Services
                 return new();
 
             await using var file = File.OpenRead(ConfigFilePath);
-            return await JsonSerializer.DeserializeAsync<BooruConfig>(file) ?? new();
+            try
+            {
+                var loadedConfig = await JsonSerializer.DeserializeAsync<BooruConfig>(file) ?? new();
+                loadedConfig.Dirty = false;
+                return loadedConfig;
+            }
+            catch (Exception e)
+            {
+                Trace.TraceError("Configuration deserialization error: {0}", e);
+                return new();
+            }
         }
 
         private void EnsureFolderExists(string path)
         {
             Directory.CreateDirectory(path);
         }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
     }
 }

@@ -34,6 +34,11 @@
         <SolidColorBrush x:Key="NeptuneSemiTransparentForegroundBrush"
                          Color="#66FFFFFF" />
     </Styles.Resources>
+    
+    <Style Selector="Window">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Background" Value="{StaticResource NeptuneBackgroundBrush}" />
+    </Style>
 
     <Style Selector="AccessText">
         <Setter Property="FontFamily"

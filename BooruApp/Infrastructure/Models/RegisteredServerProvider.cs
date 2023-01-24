@@ -1,6 +1,7 @@
+using BooruApp.Api;
 using BooruApp.Api.Interfaces;
 
-namespace BooruApp.Api.Models
+namespace BooruApp.Infrastructure.Models
 {
     public class RegisteredServerProvider
     {

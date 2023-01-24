@@ -1,8 +1,8 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using BooruApp.Api.Models;
-using BooruApp.Messages;
-using BooruApp.Services;
+using BooruApp.Infrastructure.Messages;
+using BooruApp.Infrastructure.Services;
 using Glitonea.Mvvm;
 using Glitonea.Mvvm.Messaging;
 

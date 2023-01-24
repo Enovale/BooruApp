@@ -8,8 +8,6 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="BooruApp.Views.ImageListView"
              Name="ImageList"
-             Foreground="White"
-             Background="{StaticResource NeptuneBackgroundBrush}"
              DataContext="{mvvm:DataContextSource viewModels:ImageListViewModel}">
     <Design.DataContext>
         <viewModels:ImageListViewModel />

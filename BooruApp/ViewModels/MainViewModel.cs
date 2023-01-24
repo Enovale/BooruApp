@@ -1,15 +1,41 @@
-﻿using Avalonia;
+﻿using System;
+using System.ComponentModel;
+using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
-using BooruApp.Messages;
+using BooruApp.Api.Models;
+using BooruApp.Infrastructure.Messages;
+using BooruApp.Infrastructure.Services;
 using BooruApp.Views.Windows;
 using Glitonea.Extensions;
 using Glitonea.Mvvm;
+using PropertyChanged;
 
 namespace BooruApp.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        public BooruConfig Config
+            => _appStorageService.Config;
+
+        public int SelectedServerIndex
+        {
+            get => _appStorageService.Config.SelectedServerIndex;
+            set
+            {
+                _appStorageService.Config.SelectedServerIndex = value;
+                _appStorageService.SaveConfig();
+            }
+        }
+
         public string SearchText { get; set; } = string.Empty;
+
+        private readonly IAppStorageService _appStorageService;
+
+        public MainViewModel(IAppStorageService appStorageService)
+        {
+            _appStorageService = appStorageService;
+            PropertyChanged += (sender, args) => Console.WriteLine(args.PropertyName + " " + SelectedServerIndex);
+        }
 
         public void ExitApplication()
         {

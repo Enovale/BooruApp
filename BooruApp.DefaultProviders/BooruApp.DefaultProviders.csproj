@@ -9,4 +9,8 @@
       <ProjectReference Include="..\BooruApp.Api\BooruApp.Api.csproj" />
     </ItemGroup>
 
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+      <Exec Command="cp &quot;$(TargetPath)&quot; &quot;$(LocalAppData)/booruapp/Plugins/$(TargetFileName)&quot;" />
+    </Target>
+
 </Project>

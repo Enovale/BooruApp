@@ -1,9 +1,11 @@
+using System.ComponentModel;
+using System.Threading.Tasks;
 using BooruApp.Api.Models;
 using Glitonea.Mvvm;
 
-namespace BooruApp.Services
+namespace BooruApp.Infrastructure.Services
 {
-    public interface IAppStorageService : IService
+    public interface IAppStorageService : IService, INotifyPropertyChanged
     {
         public string AppName { get; }
     
@@ -16,5 +18,9 @@ namespace BooruApp.Services
         public string ConfigFilePath { get; }
 
         public BooruConfig Config { get; }
+
+        public void SaveConfig();
+
+        public Task SaveConfigAsync();
     }
 }

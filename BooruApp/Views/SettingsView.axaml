@@ -2,15 +2,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:mvvm="clr-namespace:Glitonea.Mvvm;assembly=Glitonea"
              xmlns:viewModels="clr-namespace:BooruApp.ViewModels"
              xmlns:models="clr-namespace:BooruApp.Api.Models;assembly=BooruApp.Api"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="BooruApp.Views.SettingsView"
-             Name="SettingsViewRoot"
-             Foreground="White"
-             Background="{StaticResource NeptuneBackgroundBrush}"
-             DataContext="{mvvm:DataContextSource viewModels:SettingsViewModel}">
+             Name="SettingsViewRoot">
     <Design.DataContext>
         <viewModels:SettingsViewModel />
     </Design.DataContext>
@@ -35,13 +31,16 @@
     </UserControl.DataTemplates>
 
     <TabControl>
-        <TabItem IsSelected="True" Header="Providers">
+        <TabItem IsSelected="True" Header="Servers">
             <Grid ColumnDefinitions="*,Auto">
-                <ListBox Grid.Column="0" Items="{Binding ServerConfigs}">
-                </ListBox>
+                <ListBox Grid.Column="0" Name="ServerConfigList"
+                         Items="{Binding NewConfig.Servers}"
+                         SelectionMode="Multiple"
+                         SelectedItems="{Binding SelectedServers}" />
                 <StackPanel Grid.Column="1">
-                    <Button Content="+" Command="{Binding AddProvider}" />
-                    <Button Content="-" Command="{Binding RemoveProvider}" />
+                    <Button Content="+" Command="{Binding AddServer}" />
+                    <Button Content="-" Command="{Binding RemoveSelectedServers}" 
+                            IsEnabled="{Binding SelectedItems.Count, FallbackValue=0, ElementName=ServerConfigList}" />
                 </StackPanel>
             </Grid>
         </TabItem>
