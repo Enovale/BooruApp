@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using BooruApp.Api.Models;
 using BooruApp.Infrastructure.Messages;
@@ -8,7 +6,7 @@ using BooruApp.Infrastructure.Services;
 using BooruApp.Views.Windows;
 using Glitonea.Extensions;
 using Glitonea.Mvvm;
-using PropertyChanged;
+using Glitonea.Mvvm.Messaging;
 
 namespace BooruApp.ViewModels
 {
@@ -22,8 +20,11 @@ namespace BooruApp.ViewModels
             get => _appStorageService.Config.SelectedServerIndex;
             set
             {
-                _appStorageService.Config.SelectedServerIndex = value;
-                _appStorageService.SaveConfig();
+                if (value >= 0)
+                {
+                    _appStorageService.Config.SelectedServerIndex = value;
+                    _appStorageService.SaveConfig();
+                }
             }
         }
 
@@ -34,7 +35,13 @@ namespace BooruApp.ViewModels
         public MainViewModel(IAppStorageService appStorageService)
         {
             _appStorageService = appStorageService;
-            PropertyChanged += (sender, args) => Console.WriteLine(args.PropertyName + " " + SelectedServerIndex);
+
+            Message.Subscribe<SettingsAppliedMessage>(this, SettingsApplied);
+        }
+
+        private void SettingsApplied(SettingsAppliedMessage obj)
+        {
+            OnPropertyChanged(nameof(SelectedServerIndex));
         }
 
         public void ExitApplication()

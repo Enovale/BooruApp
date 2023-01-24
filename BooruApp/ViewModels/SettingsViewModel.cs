@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -7,12 +6,13 @@ using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using BooruApp.Api.Helpers;
 using BooruApp.Api.Models;
 using BooruApp.Infrastructure;
+using BooruApp.Infrastructure.Messages;
 using BooruApp.Infrastructure.Models;
 using BooruApp.Infrastructure.Services;
 using Glitonea.Mvvm;
+using Glitonea.Mvvm.Messaging;
 
 namespace BooruApp.ViewModels
 {
@@ -85,6 +85,7 @@ namespace BooruApp.ViewModels
             _appStorageService.SaveConfig();
             
             CopyConfig();
+            Message.Broadcast<SettingsAppliedMessage>();
         }
 
         public ICommand CloseWindowCommand { get; }
