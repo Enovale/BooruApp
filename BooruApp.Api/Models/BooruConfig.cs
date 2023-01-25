@@ -6,7 +6,6 @@ using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 using BooruApp.Api.Helpers;
 using BooruApp.Api.Interfaces;
-using PropertyChanged;
 
 namespace BooruApp.Api.Models
 {

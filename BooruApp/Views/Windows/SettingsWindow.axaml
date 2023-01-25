@@ -16,10 +16,10 @@
         <viewModels:SettingsViewModel />
     </Design.DataContext>
 
-    <Grid RowDefinitions="*,Auto,Auto">
+    <Grid RowDefinitions="*,Auto,Auto" KeyboardNavigation.TabNavigation="Cycle">
         <views:SettingsView />
         <Separator Grid.Row="1" Margin="0 16 0 0" />
-        <StackPanel Grid.Row="2" Margin="16"
+        <StackPanel Grid.Row="2" Margin="16" KeyboardNavigation.TabNavigation="Continue"
                     Orientation="Horizontal"
                     HorizontalAlignment="Right">
             <Button Margin="2"

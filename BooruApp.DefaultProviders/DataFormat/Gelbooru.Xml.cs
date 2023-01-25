@@ -1,5 +1,6 @@
 using System.Xml.Serialization;
 
+#nullable disable
 namespace BooruApp.DefaultProviders.DataFormat
 {
     [XmlType("post")]
@@ -11,8 +12,15 @@ namespace BooruApp.DefaultProviders.DataFormat
         [XmlElement("created_at")]
         public string CreationDate { get; set; }
         
+        [XmlIgnore]
+        public int? Score { get; set; }
+
         [XmlElement("score")]
-        public int Score { get; set; }
+        public string ScoreString
+        {
+            get => Score.HasValue ? Score.ToString() : null;
+            set => Score = !string.IsNullOrEmpty(value) ? int.Parse(value) : default(int?);
+        }
         
         [XmlElement("width")]
         public int Width { get; set; }
@@ -88,18 +96,6 @@ namespace BooruApp.DefaultProviders.DataFormat
 
         [XmlElement("has_children")]
         public bool HasChildren { get; set; }
-
-        public static XmlAttributeOverrides R34Overrides()
-        {
-            // TODO
-            var overrides = new XmlAttributeOverrides();
-
-            overrides.Add(typeof(GelbooruPost), nameof(Id), new XmlAttributes() {XmlAttribute = new XmlAttributeAttribute(nameof(Id))});
-            overrides.Add(typeof(GelbooruPost), nameof(FileUrl), new XmlAttributes() {XmlAttribute = new XmlAttributeAttribute(nameof(FileUrl))});
-            overrides.Add(typeof(GelbooruPost), nameof(PreviewUrl), new XmlAttributes() {XmlAttribute = new XmlAttributeAttribute(nameof(PreviewUrl))});
-
-            return overrides;
-        }
     }
 
     [XmlType("tag")]

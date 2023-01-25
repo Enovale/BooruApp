@@ -1,5 +1,6 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="clr-namespace:BooruApp.Views.Converters">
     <Design.PreviewWith>
         <Border Padding="20">
             <!-- Add Controls for Previewer Here -->
@@ -33,6 +34,8 @@
 
         <SolidColorBrush x:Key="NeptuneSemiTransparentForegroundBrush"
                          Color="#66FFFFFF" />
+        
+        <converters:ServerProviderConverter x:Key="ServerProviderConverter" />
     </Styles.Resources>
     
     <Style Selector="Window">

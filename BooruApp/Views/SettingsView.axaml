@@ -13,15 +13,16 @@
 
     <UserControl.DataTemplates>
         <DataTemplate DataType="{x:Type models:ServerConfig}">
-            <StackPanel>
+            <StackPanel KeyboardNavigation.TabNavigation="Cycle">
                 <TextBox Text="{Binding Name}" />
-                <ComboBox Items="{Binding DataContext.AvailableProviders, ElementName=SettingsViewRoot}">
+                <ComboBox Items="{Binding DataContext.AvailableProviders, ElementName=SettingsViewRoot}"
+                          SelectedItem="{Binding ProviderId, 
+                          Converter={StaticResource ServerProviderConverter}, 
+                          ConverterParameter={Binding DataContext.AvailableProviders, ElementName=SettingsViewRoot}
+                          }">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Rectangle Fill="{StaticResource NeptuneBackgroundBrush}" Width="16" Height="16" Margin="0,2,5,2" />
-                                <TextBlock Text="{Binding Metadata.DisplayName}" />
-                            </StackPanel>
+                            <TextBlock Text="{Binding Converter={StaticResource ServerProviderConverter}}" />
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
@@ -39,7 +40,7 @@
                          SelectedItems="{Binding SelectedServers}" />
                 <StackPanel Grid.Column="1">
                     <Button Content="+" Command="{Binding AddServer}" />
-                    <Button Content="-" Command="{Binding RemoveSelectedServers}" 
+                    <Button Content="-" Command="{Binding RemoveSelectedServers}"
                             IsEnabled="{Binding SelectedItems.Count, FallbackValue=0, ElementName=ServerConfigList}" />
                 </StackPanel>
             </Grid>
